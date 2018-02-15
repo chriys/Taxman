@@ -1,0 +1,26 @@
+{
+    "name": "chriys/taxman",
+    "description": "PHP Sales Tax calculator using custom or Canadian rates",
+    "license": "MIT",
+    "authors": [{
+        "name": "chriys",
+        "email": "lobango.24@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Taxman\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
