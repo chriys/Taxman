@@ -2,27 +2,24 @@
 
 namespace Tests;
 
-use Taxman\Tax;
+use Taxman\Taxes;
 
 class CalculateTaxTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
-    function it_returns_an_object_with_tax_and_amount()
+    function it_calculates_tax_on_amount()
     {
-        $taxes = Tax::create('100', 5.525);
+       $tax = Taxes::of('12.00', 5.25);
 
-        $this->assertInstanceOf(Tax::class, $taxes);
-        $this->assertObjectHasAttribute('amount', $taxes);
-        $this->assertObjectHasAttribute('rates', $taxes);
-        $this->assertObjectHasAttribute('taxes', $taxes);
+       $this->assertEquals(0.63, $tax);
     }
 
     /** @test */
-    function it_calculates_tax_on_amount()
+    function it_calculates_taxes_on_amount()
     {
-       $tax = Tax::of(100, 5.525);
-       $this->assertEquals(5.525, $tax);
+        $taxes = Taxes::of('45.35', [4, 1.25, 5.725]);
+
+        $this->assertEquals(4.9771625, $taxes);
     }
-    
-    
+        
 }
