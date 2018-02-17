@@ -30,6 +30,8 @@ class CalculateTaxesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4.9771625, $taxes);
     }
 
+    
+
     // TODO: 
     // subTotal & total
     // tax list is an object ?
