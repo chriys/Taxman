@@ -70,6 +70,16 @@ class Taxes
     }
 
     /**
+     * Get the total.
+     *
+     * @return float
+     */
+    public function total()
+    {
+        return floatval($this->amount + $this->sum());
+    }
+
+    /**
      * Calculate total taxes on amount.
      *
      * @param mixed $amount
