@@ -7,7 +7,7 @@ php:
 
 sudo: false
 
-install: composer install
+install: composer require --dev phpunit/phpunit ^5.7
 
 script:
   - vendor/bin/phpunit --colors
