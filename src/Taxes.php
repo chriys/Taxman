@@ -2,7 +2,7 @@
 
 namespace Taxman;
 
-use Taxman\Exceptions\NonNumericValueException;
+use Taxman\Exceptions\NonNumericInputException;
 
 class Taxes
 {
@@ -20,11 +20,44 @@ class Taxes
      */
     private $taxes;
 
-    public function __construct($amount, $taxes)
+    public function __construct($amount, ...$taxes)
     {
         $this->amount = $this->parse($amount);
 
-        $this->taxes = $this->generate(array_slice(func_get_args(), 1));
+        $this->taxes = $this->generate(...$taxes);
+    }
+
+    /**
+     * Check if the amount is numeric otherwise
+     * throw an exception.
+     *
+     * @param mixed $amount
+     * @return NonNumericInputException
+     */
+    private function parse($amount)
+    {
+        if (! is_numeric($amount)) {
+            throw new NonNumericInputException("The input: {$amount} is not numeric.");
+        }
+
+        return $amount;
+    }
+
+    /**
+     * Generate an array of taxes.
+     *
+     * @param mixed $taxes
+     * @return array
+     */
+    private function generate($taxes)
+    {
+        if (func_num_args() > 1 || ! is_array($taxes)) {
+            $taxes = func_get_args();
+        }
+
+        return array_map(function ($tax) {
+            return $this->parse($tax);
+        }, $taxes);
     }
 
     /**
@@ -52,59 +85,6 @@ class Taxes
     }
 
     /**
-     * Check if the amount is numeric otherwise
-     * throw an exception.
-     *
-     * @param mixed $amount
-     * @return \InvalidArgumentException
-     */
-    private function parse($amount)
-    {
-        if (! is_numeric($amount)) {
-            throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: '.$amount);
-        }
-
-        return floatval($amount);
-    }
-
-    /**
-     * Generate an array of taxes.
-     *
-     * @param array $taxes
-     * @return array
-     */
-    private function generate(array $taxes)
-    {
-        if (is_array($taxes[0])) {
-            $taxes = $taxes[0];
-        }
-
-        return array_map(function ($tax) {
-            return $this->parse($tax);
-        }, $taxes);
-    }
-
-    /**
-     * Get the sub-total.
-     *
-     * @return float
-     */
-    public function subTotal()
-    {
-        return floatval($this->amount);
-    }
-
-    /**
-     * Get the total.
-     *
-     * @return float
-     */
-    public function total()
-    {
-        return floatval($this->amount + $this->sum());
-    }
-
-    /**
      * Calculate total taxes on amount.
      *
      * @param mixed $amount
@@ -113,53 +93,7 @@ class Taxes
      */
     public static function of($amount, ...$taxes)
     {
-        return (new self($amount, ...$taxes))->sum();
-    }
-
-    /**
-     * Get the sum of calculated taxes on an amount.
-     *
-     * @param mixed $amount
-     * @param array $taxes
-     * @return mixed
-     */
-    public function sum()
-    {
-        return array_sum($this->values());
-    }
-
-    /**
-     * Get the list of taxes.
-     *
-     * @return array
-     */
-    public function lists()
-    {
-        return array_combine($this->taxes, $this->values());
-    }
-
-    /**
-     * Get the list of calculates taxes.
-     *
-     * @return array
-     */
-    private function values()
-    {
-        return array_map(function ($tax) {
-            return $this->taxFor($this->amount, $tax);
-        }, $this->taxes);
-    }
-
-    /**
-     * Calculate tax on amount.
-     *
-     * @param float $amount
-     * @param float $tax
-     * @return float
-     */
-    public function taxFor($amount, $tax)
-    {
-        return $amount * ($tax / 100);
+        return static::create($amount, ...$taxes)->sum();
     }
 
     /**
@@ -170,12 +104,8 @@ class Taxes
     public function toArray()
     {
         return array_merge(
-            [
-                'sub_total' => (string) $this->amount,
-            ],
-            [
-                'taxes_details' => $this->generateTaxesDetails(),
-            ],
+            ['sub_total' => (string) $this->amount],
+            ['taxes_details' => $this->generateTaxesDetails()],
             [
                 'taxes' => (string) $this->sum(),
                 'total' => (string) $this->total(),
@@ -195,5 +125,70 @@ class Taxes
                 return (string) $value;
             }, $this->values())
         );
+    }
+
+    /**
+     * Get the sum of calculated taxes on an amount.
+     *
+     * @param mixed $amount
+     * @param array $taxes
+     * @return mixed
+     */
+    public function sum()
+    {
+        return array_sum($this->values());
+    }
+
+    /**
+     * Get the list of calculates taxes.
+     *
+     * @return array
+     */
+    private function values()
+    {
+        return array_map(function ($tax) {
+            return $this->evaluate($tax);
+        }, $this->taxes);
+    }
+
+    /**
+     * Evaluate tax on amount.
+     *
+     * @param float $tax
+     * @return string
+     */
+    private function evaluate($tax)
+    {
+        return (string) $this->amount * ($tax / 100);
+    }
+
+    /**
+     * Get the total.
+     *
+     * @return float
+     */
+    public function total()
+    {
+        return $this->amount + $this->sum();
+    }
+
+    /**
+     * Get the sub-total.
+     *
+     * @return float
+     */
+    public function subTotal()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Get the list of taxes.
+     *
+     * @return array
+     */
+    public function lists()
+    {
+        return array_combine($this->taxes, $this->values());
     }
 }

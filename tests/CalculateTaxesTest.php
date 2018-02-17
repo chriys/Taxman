@@ -8,26 +8,15 @@ use PHPUnit\Framework\TestCase;
 class CalculateTaxesTest extends TestCase
 {
     /** @test */
-    public function it_calculates_tax_on_amount()
+    public function it_calculates_taxes_on_amount()
     {
-        $tax = Taxes::of('12.00', 5.25);
+        $taxes = Taxes::of('45.35', 4);
+        $this->assertEquals(1.814, $taxes);
 
-        $this->assertEquals(0.63, $tax);
-    }
-
-    /** @test */
-    public function it_calculates_an_array_of_taxes_on_amount()
-    {
         $taxes = Taxes::of('45.35', [4, 1.25, 5.725]);
-
         $this->assertEquals(4.9771625, $taxes);
-    }
 
-    /** @test */
-    public function it_calculates_total_taxes_passed_as_arguments()
-    {
         $taxes = Taxes::of('45.35', '4', '1.25', '5.725');
-
         $this->assertEquals(4.9771625, $taxes);
     }
 
@@ -51,7 +40,7 @@ class CalculateTaxesTest extends TestCase
     }
 
     /** @test */
-    function it_returns_an_array_with_sale_details()
+    public function it_returns_an_array_with_sale_details()
     {
         $sale = Taxes::calculate('45.00', '1', '2', '3');
 
@@ -69,5 +58,4 @@ class CalculateTaxesTest extends TestCase
             $sale
         );
     }
-    
 }
