@@ -55,6 +55,7 @@ class TaxesTest extends \PHPUnit_Framework_TestCase
             ], 
             $taxes->lists()
         );
+        $this->assertEquals(1.5, $taxes->sum());
    }
    
 
