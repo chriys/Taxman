@@ -54,7 +54,6 @@ class CalculateTaxesTest extends TestCase
     function it_returns_an_array_with_sale_details()
     {
         $sale = Taxes::calculate('45.00', '1', '2', '3');
-        var_dump($sale);
 
         $this->assertArraySubset(
             [
