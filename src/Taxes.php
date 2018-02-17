@@ -147,20 +147,19 @@ class Taxes
     private function values()
     {
         return array_map(function ($tax) {
-            return $this->taxFor($this->amount, $tax);
+            return $this->evaluate($tax);
         }, $this->taxes);
     }
 
     /**
-     * Calculate tax on amount.
+     * Evaluate tax on amount.
      *
-     * @param float $amount
      * @param float $tax
-     * @return float
+     * @return string
      */
-    public function taxFor($amount, $tax)
+    private function evaluate($tax)
     {
-        return $amount * ($tax / 100);
+        return (string) $this->amount * ($tax / 100);
     }
 
     /**
