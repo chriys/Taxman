@@ -56,23 +56,9 @@ class Taxes
      * @param mixed $taxes
      * @return mixed
      */
-    public static function of($amount, $taxes)
+    public static function of($amount, ...$taxes)
     {
-        // if (func_num_args() > 2) {
-            $instance = new self($amount,array_slice(func_get_args(), 1)[0]);
-
-            return $instance->sum();
-        // }
-
-        // if (is_array($taxes)) {
-        //     return array_sum(
-        //         array_map(function($tax) use ($amount) {
-        //             return $amount * ($tax / 100);
-        //         }, $taxes)
-        //     );
-        // }
-        
-        // return $amount * ($taxes / 100);
+        return (new self($amount, ...$taxes))->sum();
     }
 
     /**
@@ -84,7 +70,6 @@ class Taxes
      */
     public function sum()
     {
-        var_dump($this->values());
         return array_sum($this->values());
     }
 
