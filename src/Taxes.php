@@ -27,6 +27,11 @@ class Taxes
         $this->taxes = $this->generate(array_slice(func_get_args(), 1));
     }
 
+    public static function create($amount, ...$taxes)
+    {
+        return new self($amount, ...$taxes);
+    }
+
     /**
      * Check if the amount is numeric otherwise
      * throw an exception.
