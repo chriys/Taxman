@@ -3,7 +3,6 @@
 namespace Tests;
 
 use Taxman\Taxes;
-use ReflectionClass;
 use PHPUnit\Framework\TestCase;
 
 class TaxesTest extends TestCase
