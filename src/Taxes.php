@@ -28,6 +28,30 @@ class Taxes
     }
 
     /**
+     * Create a new instance.
+     *
+     * @param mixed $amount
+     * @param mixed ...$taxes
+     * @return \Taxman\Taxes
+     */
+    public static function create($amount, ...$taxes)
+    {
+        return new self($amount, ...$taxes);
+    }
+
+    /**
+     * Return an array with calculations details.
+     *
+     * @param mixed $amount
+     * @param mixed ...$taxes
+     * @return array
+     */
+    public static function calculate($amount, ...$taxes)
+    {
+        return static::create($amount, ...$taxes)->toArray();
+    }
+
+    /**
      * Check if the amount is numeric otherwise
      * throw an exception.
      *
@@ -39,6 +63,7 @@ class Taxes
         if (! is_numeric($amount)) {
             throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: '.$amount);
         }
+
         return floatval($amount);
     }
 
@@ -113,10 +138,62 @@ class Taxes
         return array_combine($this->taxes, $this->values());
     }
 
+    /**
+     * Get the list of calculates taxes.
+     *
+     * @return array
+     */
     private function values()
     {
         return array_map(function ($tax) {
-            return $this->amount * ($tax / 100);
+            return $this->taxFor($this->amount, $tax);
         }, $this->taxes);
+    }
+
+    /**
+     * Calculate tax on amount.
+     *
+     * @param float $amount
+     * @param float $tax
+     * @return float
+     */
+    public function taxFor($amount, $tax)
+    {
+        return $amount * ($tax / 100);
+    }
+
+    /**
+     * Output an array of calculations details.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array_merge(
+            [
+                'sub_total' => (string) $this->amount,
+            ],
+            [
+                'taxes_details' => $this->generateTaxesDetails(),
+            ],
+            [
+                'taxes' => (string) $this->sum(),
+                'total' => (string) $this->total(),
+            ]
+        );
+    }
+
+    /**
+     * Generate an array of details name => amount.
+     *
+     * @return array
+     */
+    private function generateTaxesDetails()
+    {
+        return array_combine($this->taxes,
+            array_map(function ($value) {
+                return (string) $value;
+            }, $this->values())
+        );
     }
 }
