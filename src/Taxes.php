@@ -20,11 +20,11 @@ class Taxes
      */
     private $taxes;
 
-    public function __construct($amount, $taxes)
+    public function __construct($amount, ...$taxes)
     {
         $this->amount = $this->parse($amount);
 
-        $this->taxes = $this->generate(array_slice(func_get_args(), 1));
+        $this->taxes = $this->generate(...$taxes);
     }
 
     /**
@@ -46,13 +46,13 @@ class Taxes
     /**
      * Generate an array of taxes.
      *
-     * @param array $taxes
+     * @param mixed $taxes
      * @return array
      */
-    private function generate(array $taxes)
+    private function generate($taxes)
     {
-        if (is_array($taxes[0])) {
-            $taxes = $taxes[0];
+        if (func_num_args() > 1 || !is_array($taxes)) {
+            $taxes = func_get_args();
         }
 
         return array_map(function ($tax) {
