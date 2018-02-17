@@ -113,6 +113,11 @@ class Taxes
         return array_combine($this->taxes, $this->values());
     }
 
+    /**
+     * Get the list of calculates taxes.
+     *
+     * @return array
+     */
     private function values()
     {
         return array_map(function ($tax) {
