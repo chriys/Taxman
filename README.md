@@ -18,6 +18,7 @@ The Taxman package is open-sourced licensed under the [MIT License](License).
 - dynamically access calculated tax through its name. i.e $taxes->tps
 - README, how to use the package
 - PACKAGIST
+- float to string ?
 - Add DEV branch
 - manage package version
 - add changelog.md

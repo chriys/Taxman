@@ -28,6 +28,39 @@ class Taxes
     }
 
     /**
+     * Check if the amount is numeric otherwise
+     * throw an exception.
+     *
+     * @param mixed $amount
+     * @return NonNumericInputException
+     */
+    private function parse($amount)
+    {
+        if (! is_numeric($amount)) {
+            throw new NonNumericInputException("The input: {$amount} is not numeric.");
+        }
+
+        return $amount;
+    }
+
+    /**
+     * Generate an array of taxes.
+     *
+     * @param array $taxes
+     * @return array
+     */
+    private function generate(array $taxes)
+    {
+        if (is_array($taxes[0])) {
+            $taxes = $taxes[0];
+        }
+
+        return array_map(function ($tax) {
+            return $this->parse($tax);
+        }, $taxes);
+    }
+
+    /**
      * Create a new instance.
      *
      * @param mixed $amount
@@ -52,59 +85,6 @@ class Taxes
     }
 
     /**
-     * Check if the amount is numeric otherwise
-     * throw an exception.
-     *
-     * @param mixed $amount
-     * @return NonNumericInputException
-     */
-    private function parse($amount)
-    {
-        if (! is_numeric($amount)) {
-            throw new NonNumericInputException("The input: {$amount} is not numeric.");
-        }
-
-        return floatval($amount);
-    }
-
-    /**
-     * Generate an array of taxes.
-     *
-     * @param array $taxes
-     * @return array
-     */
-    private function generate(array $taxes)
-    {
-        if (is_array($taxes[0])) {
-            $taxes = $taxes[0];
-        }
-
-        return array_map(function ($tax) {
-            return $this->parse($tax);
-        }, $taxes);
-    }
-
-    /**
-     * Get the sub-total.
-     *
-     * @return float
-     */
-    public function subTotal()
-    {
-        return floatval($this->amount);
-    }
-
-    /**
-     * Get the total.
-     *
-     * @return float
-     */
-    public function total()
-    {
-        return floatval($this->amount + $this->sum());
-    }
-
-    /**
      * Calculate total taxes on amount.
      *
      * @param mixed $amount
@@ -113,7 +93,38 @@ class Taxes
      */
     public static function of($amount, ...$taxes)
     {
-        return (new self($amount, ...$taxes))->sum();
+        return static::create($amount, ...$taxes)->sum();
+    }
+
+    /**
+     * Output an array of calculations details.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array_merge(
+            ['sub_total' => (string) $this->amount],
+            ['taxes_details' => $this->generateTaxesDetails()],
+            [
+                'taxes' => (string) $this->sum(),
+                'total' => (string) $this->total(),
+            ]
+        );
+    }
+
+    /**
+     * Generate an array of details name => amount.
+     *
+     * @return array
+     */
+    private function generateTaxesDetails()
+    {
+        return array_combine($this->taxes,
+            array_map(function ($value) {
+                return (string) $value;
+            }, $this->values())
+        );
     }
 
     /**
@@ -126,16 +137,6 @@ class Taxes
     public function sum()
     {
         return array_sum($this->values());
-    }
-
-    /**
-     * Get the list of taxes.
-     *
-     * @return array
-     */
-    public function lists()
-    {
-        return array_combine($this->taxes, $this->values());
     }
 
     /**
@@ -163,37 +164,32 @@ class Taxes
     }
 
     /**
-     * Output an array of calculations details.
+     * Get the total.
      *
-     * @return array
+     * @return float
      */
-    public function toArray()
+    public function total()
     {
-        return array_merge(
-            [
-                'sub_total' => (string) $this->amount,
-            ],
-            [
-                'taxes_details' => $this->generateTaxesDetails(),
-            ],
-            [
-                'taxes' => (string) $this->sum(),
-                'total' => (string) $this->total(),
-            ]
-        );
+        return $this->amount + $this->sum();
     }
 
     /**
-     * Generate an array of details name => amount.
+     * Get the sub-total.
+     *
+     * @return float
+     */
+    public function subTotal()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Get the list of taxes.
      *
      * @return array
      */
-    private function generateTaxesDetails()
+    public function lists()
     {
-        return array_combine($this->taxes,
-            array_map(function ($value) {
-                return (string) $value;
-            }, $this->values())
-        );
+        return array_combine($this->taxes, $this->values());
     }
 }
