@@ -60,6 +60,16 @@ class Taxes
     }
 
     /**
+     * Get the sub-total.
+     *
+     * @return float
+     */
+    public function subTotal()
+    {
+        return floatval($this->amount);
+    }
+
+    /**
      * Calculate total taxes on amount.
      *
      * @param mixed $amount

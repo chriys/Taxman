@@ -79,11 +79,11 @@ class TaxesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    // public function it_returns_the_sub_total()
-    // {
-    //     $taxes = new Taxes('45.35', '4', '1.25', '5.725');
+    public function it_returns_the_sub_total()
+    {
+        $taxes = new Taxes('45.35', '4', '1.25', '5.725');
 
-    //     $this->assertEquals(4.9771625, $taxes->sum());
-    //     $this->assertEquals(45.35, $taxes->subTotal());
-    // }
+        $this->assertEquals(4.9771625, $taxes->sum());
+        $this->assertEquals(45.35, $taxes->subTotal());
+    }
 }
