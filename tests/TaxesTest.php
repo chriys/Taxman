@@ -9,6 +9,24 @@ use Taxman\Exceptions\NonNumericValueException;
 class TaxesTest extends TestCase
 {
     /** @test */
+    function it_creates_a_new_instance()
+    {
+        $sale = Taxes::create('10.00', ['4', '5']);
+
+        $this->assertInstanceOf(Taxes::class, $sale);
+        $this->assertObjectHasAttribute('amount', $sale);
+        $this->assertObjectHasAttribute('taxes', $sale);
+        $this->assertEquals(0.9, $sale->sum());
+
+        $sale2 = Taxes::create('10.00', '4', '5');
+
+        $this->assertInstanceOf(Taxes::class, $sale2);
+        $this->assertObjectHasAttribute('amount', $sale2);
+        $this->assertObjectHasAttribute('taxes', $sale2);
+        $this->assertEquals(0.9, $sale2->sum());
+    }
+
+    /** @test */
     public function it_throws_exception_for_non_numeric_amount()
     {
         $this->expectException(NonNumericValueException::class);
@@ -74,21 +92,16 @@ class TaxesTest extends TestCase
     }
 
     /** @test */
-    function it_creates_a_new_instance()
+    function it_builds_an_array_with_calculations_details()
     {
-        $sale = Taxes::create('10.00', ['4', '5']);
+        $taxes = new Taxes('10', '1');
 
-        $this->assertInstanceOf(Taxes::class, $sale);
-        $this->assertObjectHasAttribute('amount', $sale);
-        $this->assertObjectHasAttribute('taxes', $sale);
-        $this->assertEquals(0.9, $sale->sum());
+        $taxesDetails = $taxes->toArray();
 
-        $sale2 = Taxes::create('10.00', '4', '5');
-
-        $this->assertInstanceOf(Taxes::class, $sale2);
-        $this->assertObjectHasAttribute('amount', $sale2);
-        $this->assertObjectHasAttribute('taxes', $sale2);
-        $this->assertEquals(0.9, $sale2->sum());
+        $this->assertArrayHasKey('sub_total', $taxesDetails);
+        $this->assertArrayHasKey('taxes_details', $taxesDetails);
+        $this->assertArrayHasKey('taxes', $taxesDetails);
+        $this->assertArrayHasKey('total', $taxesDetails);
     }
     
 }

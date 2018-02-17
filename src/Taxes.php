@@ -27,9 +27,28 @@ class Taxes
         $this->taxes = $this->generate(array_slice(func_get_args(), 1));
     }
 
+    /**
+     * Create a new instance.
+     *
+     * @param mixed $amount
+     * @param mixed ...$taxes
+     * @return \Taxman\Taxes
+     */
     public static function create($amount, ...$taxes)
     {
         return new self($amount, ...$taxes);
+    }
+
+    /**
+     * Return an array with calculations details.
+     *
+     * @param mixed $amount
+     * @param mixed ...$taxes
+     * @return array
+     */
+    public static function calculate($amount, ...$taxes)
+    {
+        return static::create($amount, ...$taxes)->toArray();
     }
 
     /**
@@ -126,7 +145,35 @@ class Taxes
     private function values()
     {
         return array_map(function ($tax) {
-            return $this->amount * ($tax / 100);
+            return $this->taxFor($this->amount, $tax);
         }, $this->taxes);
+    }
+
+    /**
+     * Calculate tax on amount
+     *
+     * @param float $amount
+     * @param float $tax
+     * @return float
+     */
+    public function taxFor($amount, $tax)
+    {
+        return $amount * ($tax / 100);
+    }
+    
+    public function toArray()
+    {
+       return array_merge(
+            [
+                'sub_total' => (string) $this->amount,
+            ],
+            [
+                'taxes_details' => array_combine($this->taxes, $this->values())
+            ],
+            [
+                'taxes' => (string) $this->sum(),
+                'total' => (string) $this->total(),
+            ]
+        );
     }
 }
