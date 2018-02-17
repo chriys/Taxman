@@ -161,6 +161,11 @@ class Taxes
         return $amount * ($tax / 100);
     }
     
+    /**
+     * Output an array of calculations details.
+     *
+     * @return array
+     */
     public function toArray()
     {
        return array_merge(
@@ -168,14 +173,26 @@ class Taxes
                 'sub_total' => (string) $this->amount,
             ],
             [
-                'taxes_details' => array_combine($this->taxes, array_map(function($value) {
-                    return (string) $value;
-                }, $this->values()))
+                'taxes_details' => $this->generateTaxesDetails()
             ],
             [
                 'taxes' => (string) $this->sum(),
                 'total' => (string) $this->total(),
             ]
+        );
+    }
+
+    /**
+     * Generate an array of details name => amount
+     *
+     * @return array
+     */
+    private function generateTaxesDetails()
+    {
+       return array_combine($this->taxes, 
+            array_map(function($value) {
+                return (string) $value;
+            }, $this->values())
         );
     }
 }
