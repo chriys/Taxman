@@ -63,6 +63,7 @@ class Taxes
         if (! is_numeric($amount)) {
             throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: '.$amount);
         }
+
         return floatval($amount);
     }
 
@@ -150,7 +151,7 @@ class Taxes
     }
 
     /**
-     * Calculate tax on amount
+     * Calculate tax on amount.
      *
      * @param float $amount
      * @param float $tax
@@ -160,15 +161,15 @@ class Taxes
     {
         return $amount * ($tax / 100);
     }
-    
+
     public function toArray()
     {
-       return array_merge(
+        return array_merge(
             [
                 'sub_total' => (string) $this->amount,
             ],
             [
-                'taxes_details' => array_combine($this->taxes, $this->values())
+                'taxes_details' => array_combine($this->taxes, $this->values()),
             ],
             [
                 'taxes' => (string) $this->sum(),
