@@ -49,22 +49,4 @@ class CalculateTaxesTest extends TestCase
         $this->assertEquals(45.35, $sale->subTotal());
         $this->assertEquals(50.3271625, $sale->total());
     }
-<<<<<<< HEAD
-=======
-
-    // TODO:
-    // tax list is an object ?
-    // PACKAGIST
-    // STYLECI
-    // TRAVIS CI
-    // README
-    // Add DEV branch
-    // create an instance with helper methods
-    // instance return total taxes and each taxe with amount
-    // manage package version
-    // add changelog.md
-    // Give name to taxes to identify
-    // find taxes definitions from a config file or something alike for Canada provinces
-    // look taxes in repository if not numeric
->>>>>>> ee9ba5f8b21a13695b95dc3d9a088a49e89c02e7
 }
