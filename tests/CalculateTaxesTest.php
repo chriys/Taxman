@@ -31,16 +31,18 @@ class CalculateTaxesTest extends \PHPUnit_Framework_TestCase
     }
 
     // TODO: 
-    // PUSH TO REPO
-    // verify amount & taxes are numeric
+    // subTotal & total
     // tax list is an object ?
-    // grandTotal & total
     // PACKAGIST
     // STYLECI
     // TRAVIS CI
     // README
+    // Add DEV branch
     // create an instance with helper methods
     // instance return total taxes and each taxe with amount
+    // manage package version
+    // add changelog.md
     // Give name to taxes to identify
-    // find taxes definitions from a config file or something alike
+    // find taxes definitions from a config file or something alike for Canada provinces
+    // look taxes in repository if not numeric
 }

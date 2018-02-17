@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Taxman\Taxes;
+use Taxman\Exceptions\NonNumericValueException;
 
 class TaxesTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,12 +12,24 @@ class TaxesTest extends \PHPUnit_Framework_TestCase
    {
         try {
             new Taxes('ABC12.00', 0);
-        } catch (\InvalidArgumentException $e) {
+        } catch (NonNumericValueException $e) {
             return;
         }
 
         $this->fail('A non numeric amount was entered but no exception was thrown.');
    }
+
+    /** @test */
+    function it_throws_exception_for_non_numeric_taxes()
+    {
+        try {
+            new Taxes('50.00', ['NonNumericTax', '5', '2.99']);
+        } catch (NonNumericValueException $e) {
+            return;
+        }
+
+        $this->fail('A non numeric tax value was entered but no exception was thrown.');
+    }
 
    /** @test */
    function it_returns_list_of_taxes_values()
@@ -66,6 +79,5 @@ class TaxesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(4.9771625, $taxes->sum());
    }
-   
    
 }

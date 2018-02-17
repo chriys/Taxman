@@ -2,6 +2,8 @@
 
 namespace Taxman;
 
+use Taxman\Exceptions\NonNumericValueException;
+
 class Taxes
 {
     /**
@@ -35,7 +37,7 @@ class Taxes
     private function parse($amount)
     {
         if (!is_numeric($amount))
-            throw new \InvalidArgumentException('The Taxes class only accepts amount that is numeric. Input was: ' . $amount);
+            throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: ' . $amount);
 
         return floatval($amount);
     }
@@ -43,10 +45,12 @@ class Taxes
     private function generate(array $taxes)
     {
         if (is_array($taxes[0])) {
-            return $taxes[0];
+            return array_map(function($tax) {
+                return $this->parse($tax);
+            }, $taxes[0]);
         }
 
-        return $taxes;
+        return $this->parse($taxes);
     }
 
     /**
