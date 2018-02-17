@@ -51,7 +51,7 @@ class Taxes
      */
     private function generate($taxes)
     {
-        if (func_num_args() > 1 || !is_array($taxes)) {
+        if (func_num_args() > 1 || ! is_array($taxes)) {
             $taxes = func_get_args();
         }
 
