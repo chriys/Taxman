@@ -44,6 +44,7 @@ class Taxes
         if (! is_numeric($amount)) {
             throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: '.$amount);
         }
+
         return floatval($amount);
     }
 
