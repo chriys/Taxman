@@ -7,14 +7,14 @@ use Taxman\Exceptions\NonNumericValueException;
 class Taxes
 {
     /**
-     * The amount on which to calculate taxes
+     * The amount on which to calculate taxes.
      *
      * @var float
      */
     private $amount;
 
     /**
-     * The taxe(s) to apply on the amount
+     * The taxe(s) to apply on the amount.
      *
      * @var mixed
      */
@@ -29,16 +29,16 @@ class Taxes
 
     /**
      * Check if the amount is numeric otherwise
-     * throw an exception
+     * throw an exception.
      *
      * @param mixed $amount
      * @return \InvalidArgumentException
      */
     private function parse($amount)
     {
-        if (!is_numeric($amount))
-            throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: ' . $amount);
-
+        if (! is_numeric($amount)) {
+            throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: '.$amount);
+        }
         return floatval($amount);
     }
 
@@ -54,7 +54,7 @@ class Taxes
             $taxes = $taxes[0];
         }
 
-        return array_map(function($tax) {
+        return array_map(function ($tax) {
             return $this->parse($tax);
         }, $taxes);
     }
@@ -92,7 +92,7 @@ class Taxes
     }
 
     /**
-     * Get the sum of calculated taxes on an amount
+     * Get the sum of calculated taxes on an amount.
      *
      * @param mixed $amount
      * @param array $taxes
@@ -104,7 +104,7 @@ class Taxes
     }
 
     /**
-     * Get the list of taxes
+     * Get the list of taxes.
      *
      * @return array
      */
@@ -115,7 +115,7 @@ class Taxes
 
     private function values()
     {
-        return array_map(function($tax) {
+        return array_map(function ($tax) {
             return $this->amount * ($tax / 100);
         }, $this->taxes);
     }
