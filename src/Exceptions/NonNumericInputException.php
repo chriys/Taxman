@@ -4,6 +4,6 @@ namespace Taxman\Exceptions;
 
 use InvalidArgumentException;
 
-class NonNumericValueException extends InvalidArgumentException
+class NonNumericInputException extends InvalidArgumentException
 {
 }

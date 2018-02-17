@@ -2,7 +2,7 @@
 
 namespace Taxman;
 
-use Taxman\Exceptions\NonNumericValueException;
+use Taxman\Exceptions\NonNumericInputException;
 
 class Taxes
 {
@@ -56,12 +56,12 @@ class Taxes
      * throw an exception.
      *
      * @param mixed $amount
-     * @return \InvalidArgumentException
+     * @return NonNumericInputException
      */
     private function parse($amount)
     {
         if (! is_numeric($amount)) {
-            throw new NonNumericValueException('The Taxes class only accepts amount and taxes that are numeric. Input was: '.$amount);
+            throw new NonNumericInputException("The input: {$amount} is not numeric.");
         }
 
         return floatval($amount);
