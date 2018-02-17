@@ -27,4 +27,5 @@ The Taxman package is open-sourced licensed under the [MIT License](License).
 - contributing guide
 - testing guide
 - set debuginfo
+- json serialization
 - add phpstan ?
