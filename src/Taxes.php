@@ -42,15 +42,41 @@ class Taxes
         return floatval($amount);
     }
 
+    /**
+     * Generate an array of taxes.
+     *
+     * @param array $taxes
+     * @return array
+     */
     private function generate(array $taxes)
     {
         if (is_array($taxes[0])) {
-            return array_map(function($tax) {
-                return $this->parse($tax);
-            }, $taxes[0]);
+            $taxes = $taxes[0];
         }
 
-        return $this->parse($taxes);
+        return array_map(function($tax) {
+            return $this->parse($tax);
+        }, $taxes);
+    }
+
+    /**
+     * Get the sub-total.
+     *
+     * @return float
+     */
+    public function subTotal()
+    {
+        return floatval($this->amount);
+    }
+
+    /**
+     * Get the total.
+     *
+     * @return float
+     */
+    public function total()
+    {
+        return floatval($this->amount + $this->sum());
     }
 
     /**

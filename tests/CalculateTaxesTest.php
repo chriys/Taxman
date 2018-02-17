@@ -30,8 +30,27 @@ class CalculateTaxesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4.9771625, $taxes);
     }
 
+    /** @test */
+    function it_returns_the_sub_total()
+    {
+        $taxes = new Taxes('45.35', '4', '1.25', '5.725');
+
+        $this->assertEquals(4.9771625, $taxes->sum());
+        $this->assertEquals(45.35, $taxes->subTotal());
+    }
+
+    /** @test */
+    function it_calculates_sales_total()
+    {
+        $sale = new Taxes('45.35', '4', '1.25', '5.725');
+
+        $this->assertEquals(4.9771625, $sale->sum());
+        $this->assertEquals(45.35, $sale->subTotal());
+        $this->assertEquals(50.3271625, $sale->total());
+    }
+    
+    
     // TODO: 
-    // subTotal & total
     // tax list is an object ?
     // PACKAGIST
     // STYLECI
