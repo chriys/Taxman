@@ -31,9 +31,14 @@ class CalculateTaxesTest extends \PHPUnit_Framework_TestCase
     }
 
     // TODO: 
+    // PUSH TO REPO
     // verify amount & taxes are numeric
-    // tax list is an object
+    // tax list is an object ?
     // grandTotal & total
+    // PACKAGIST
+    // STYLECI
+    // TRAVIS CI
+    // README
     // create an instance with helper methods
     // instance return total taxes and each taxe with amount
     // Give name to taxes to identify

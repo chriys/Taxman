@@ -84,7 +84,7 @@ class Taxes
      */
     public function sum()
     {
-        // var_dump($this->values());
+        var_dump($this->values());
         return array_sum($this->values());
     }
 

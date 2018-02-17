@@ -32,9 +32,11 @@ class TaxesTest extends \PHPUnit_Framework_TestCase
             ],
             $taxes->lists()
         );
+        $this->assertEquals(1.5, $taxes->sum());
 
         $taxes2 = new Taxes('10.00', '1.25');
         $this->assertArraySubset(['1.25' => 0.125], $taxes2->lists());
+        $this->assertEquals(0.125, $taxes2->sum());
    }
    
 
