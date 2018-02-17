@@ -36,7 +36,7 @@ class TaxesTest extends TestCase
                 '2' => 0.2,
                 '3' => 0.3,
                 '4' => 0.4,
-                '5' => 0.5
+                '5' => 0.5,
             ],
             $taxes->lists()
         );
@@ -58,13 +58,13 @@ class TaxesTest extends TestCase
                 '2' => 0.2,
                 '3' => 0.3,
                 '4' => 0.4,
-                '5' => 0.5
+                '5' => 0.5,
             ],
             $taxes->lists()
         );
         $this->assertEquals(1.5, $taxes->sum());
     }
-   
+
     /** @test */
     public function it_sums_taxes_calculated_on_amount()
     {
@@ -72,5 +72,4 @@ class TaxesTest extends TestCase
 
         $this->assertEquals(4.9771625, $taxes->sum());
     }
-
 }

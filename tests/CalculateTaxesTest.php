@@ -8,15 +8,15 @@ use PHPUnit\Framework\TestCase;
 class CalculateTaxesTest extends TestCase
 {
     /** @test */
-    function it_calculates_tax_on_amount()
+    public function it_calculates_tax_on_amount()
     {
-       $tax = Taxes::of('12.00', 5.25);
+        $tax = Taxes::of('12.00', 5.25);
 
-       $this->assertEquals(0.63, $tax);
+        $this->assertEquals(0.63, $tax);
     }
 
     /** @test */
-    function it_calculates_an_array_of_taxes_on_amount()
+    public function it_calculates_an_array_of_taxes_on_amount()
     {
         $taxes = Taxes::of('45.35', [4, 1.25, 5.725]);
 
@@ -24,7 +24,7 @@ class CalculateTaxesTest extends TestCase
     }
 
     /** @test */
-    function it_calculates_total_taxes_passed_as_arguments()
+    public function it_calculates_total_taxes_passed_as_arguments()
     {
         $taxes = Taxes::of('45.35', '4', '1.25', '5.725');
 
@@ -32,7 +32,7 @@ class CalculateTaxesTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_sub_total()
+    public function it_returns_the_sub_total()
     {
         $taxes = new Taxes('45.35', '4', '1.25', '5.725');
 
@@ -41,7 +41,7 @@ class CalculateTaxesTest extends TestCase
     }
 
     /** @test */
-    function it_calculates_sales_total()
+    public function it_calculates_sales_total()
     {
         $sale = new Taxes('45.35', '4', '1.25', '5.725');
 
@@ -49,9 +49,8 @@ class CalculateTaxesTest extends TestCase
         $this->assertEquals(45.35, $sale->subTotal());
         $this->assertEquals(50.3271625, $sale->total());
     }
-    
-    
-    // TODO: 
+
+    // TODO:
     // tax list is an object ?
     // PACKAGIST
     // STYLECI
