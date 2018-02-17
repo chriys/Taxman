@@ -1,7 +1,7 @@
 # Taxman
+![](https://img.shields.io/badge/size-50%20kB-brightgreen.svg)
 [![Build Status](https://travis-ci.org/chriys/Taxman.svg?branch=master)](https://travis-ci.org/chriys/Taxman)
 [![Maintainability](https://api.codeclimate.com/v1/badges/82f1863574f6c8753c85/maintainability)](https://codeclimate.com/github/chriys/Taxman/maintainability)
-[![Only 32 Kb](https://badge-size.herokuapp.com/Naereen/StrapDown.js/master/strapdown.min.js)](https://github.com/Naereen/StrapDown.js/blob/master/strapdown.min.js)
 
 
 PHP Sales Tax calculator using custom or Canadian rates
