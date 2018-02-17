@@ -168,7 +168,9 @@ class Taxes
                 'sub_total' => (string) $this->amount,
             ],
             [
-                'taxes_details' => array_combine($this->taxes, $this->values())
+                'taxes_details' => array_combine($this->taxes, array_map(function($value) {
+                    return (string) $value;
+                }, $this->values()))
             ],
             [
                 'taxes' => (string) $this->sum(),
