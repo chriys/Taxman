@@ -3,8 +3,9 @@
 namespace Tests;
 
 use Taxman\Taxes;
+use PHPUnit\Framework\TestCase;
 
-class CalculateTaxesTest extends \PHPUnit_Framework_TestCase
+class CalculateTaxesTest extends TestCase
 {
     /** @test */
     function it_calculates_tax_on_amount()

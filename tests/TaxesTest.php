@@ -3,32 +3,27 @@
 namespace Tests;
 
 use Taxman\Taxes;
+use PHPUnit\Framework\TestCase;
 use Taxman\Exceptions\NonNumericValueException;
 
-class TaxesTest extends \PHPUnit_Framework_TestCase
+class TaxesTest extends TestCase
 {
     /** @test */
     public function it_throws_exception_for_non_numeric_amount()
     {
-        try {
-            new Taxes('ABC12.00', 0);
-        } catch (NonNumericValueException $e) {
-            return;
-        }
+        $this->expectException(NonNumericValueException::class);
+        $this->expectExceptionMessage('The Taxes class only accepts amount and taxes that are numeric.');
 
-        $this->fail('A non numeric amount was entered but no exception was thrown.');
+        $taxes = new Taxes('ABC12.00', 0);
     }
 
     /** @test */
     public function it_throws_exception_for_non_numeric_taxes()
     {
-        try {
-            new Taxes('50.00', ['NonNumericTax', '5', '2.99']);
-        } catch (NonNumericValueException $e) {
-            return;
-        }
+        $this->expectException(NonNumericValueException::class);
+        $this->expectExceptionMessage('The Taxes class only accepts amount and taxes that are numeric.');
 
-        $this->fail('A non numeric tax value was entered but no exception was thrown.');
+        $taxes = new Taxes('50.00', ['NonNumericTax', '5', '2.99']);
     }
 
     /** @test */
