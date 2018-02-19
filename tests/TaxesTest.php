@@ -82,4 +82,21 @@ class TaxesTest extends TestCase
         $this->assertArrayHasKey('taxes', $taxesDetails);
         $this->assertArrayHasKey('total', $taxesDetails);
     }
+
+    /** @test */
+    public function it_builds_a_json_object_with_calculations_details()
+    {
+        $taxes = Taxes::create('10', '1');
+
+        $taxesDetails = [
+            'sub_total' => '10',
+            'taxes_details' => [
+                '1' => '0.1'
+            ],
+            'taxes' => '0.1',
+            'total' => '10.1',
+        ];
+
+        $this->assertJsonStringEqualsJsonString(json_encode($taxesDetails), $taxes->toJson());
+    }
 }
