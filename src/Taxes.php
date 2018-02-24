@@ -2,6 +2,7 @@
 
 namespace Taxman;
 
+use Taxman\Exceptions\NotFoundRateException;
 use Taxman\Exceptions\NonNumericInputException;
 
 class Taxes
@@ -200,5 +201,16 @@ class Taxes
     public function lists()
     {
         return array_combine($this->taxes, $this->values());
+    }
+
+    public static function stateRateFor($state)
+    {
+        $rates = require __DIR__.'/../resources/rates.php';
+
+        if (isset($rates[$state])) {
+            return $rates[$state]['state_rate']['rate'];
+        }
+
+        throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
     }
 }
