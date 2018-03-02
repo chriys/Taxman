@@ -213,4 +213,15 @@ class Taxes
 
         throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
     }
+
+    public static function countryRateFor($state)
+    {
+        $rates = require __DIR__.'/../resources/rates.php';
+
+        if (isset($rates[$state])) {
+            return $rates[$state]['country_rate']['rate'];
+        }
+
+        throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
+    }
 }
