@@ -2,6 +2,7 @@
 
 namespace Taxman;
 
+use Taxman\Exceptions\NotFoundRateException;
 use Taxman\Exceptions\NonNumericInputException;
 
 class Taxes
@@ -97,13 +98,13 @@ class Taxes
     }
 
     /**
-     * Json serialization of calculations details
+     * Json serialization of calculations details.
      *
      * @return string
      */
     public function toJson()
     {
-       return json_encode($this->toArray());
+        return json_encode($this->toArray());
     }
 
     /**
@@ -200,5 +201,27 @@ class Taxes
     public function lists()
     {
         return array_combine($this->taxes, $this->values());
+    }
+
+    public static function stateRateFor($state)
+    {
+        $rates = require __DIR__.'/../resources/rates.php';
+
+        if (isset($rates[$state])) {
+            return $rates[$state]['state_rate']['rate'];
+        }
+
+        throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
+    }
+
+    public static function countryRateFor($state)
+    {
+        $rates = require __DIR__.'/../resources/rates.php';
+
+        if (isset($rates[$state])) {
+            return $rates[$state]['country_rate']['rate'];
+        }
+
+        throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
     }
 }
