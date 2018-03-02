@@ -98,13 +98,13 @@ class Taxes
     }
 
     /**
-     * Json serialization of calculations details
+     * Json serialization of calculations details.
      *
      * @return string
      */
     public function toJson()
     {
-       return json_encode($this->toArray());
+        return json_encode($this->toArray());
     }
 
     /**

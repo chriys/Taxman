@@ -8,7 +8,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '0'
+            'rate' => '0',
         ],
     ],
     'british_columbia' => [
@@ -18,7 +18,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '7'
+            'rate' => '7',
         ],
     ],
     'manitoba' => [
@@ -28,7 +28,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '8'
+            'rate' => '8',
         ],
     ],
     'new_brunswick' => [
@@ -38,7 +38,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '10'
+            'rate' => '10',
         ],
     ],
     'newfoundland_and_labrador' => [
@@ -48,7 +48,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '10'
+            'rate' => '10',
         ],
     ],
     'northwest_territories' => [
@@ -58,7 +58,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '0'
+            'rate' => '0',
         ],
     ],
     'nova_scotia' => [
@@ -68,7 +68,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '10'
+            'rate' => '10',
         ],
     ],
     'nunavut' => [
@@ -78,7 +78,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '0'
+            'rate' => '0',
         ],
     ],
     'ontario' => [
@@ -88,7 +88,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '8'
+            'rate' => '8',
         ],
     ],
     'prince_edward_island' => [
@@ -98,7 +98,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '10'
+            'rate' => '10',
         ],
     ],
     'quebec' => [
@@ -108,7 +108,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '9.975'
+            'rate' => '9.975',
         ],
     ],
     'saskatchewan' => [
@@ -118,7 +118,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '6'
+            'rate' => '6',
         ],
     ],
     'yukon' => [
@@ -128,7 +128,7 @@ return [
         ],
         'state_rate' => [
             'name' => 'tvq',
-            'rate' => '0'
+            'rate' => '0',
         ],
     ],
 ];
