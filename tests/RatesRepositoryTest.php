@@ -51,31 +51,6 @@ class RatesRepositoryTest extends TestCase
    }
 
    /** @test */
-   function it_finds_canada_taxe_rate_for_canadian_provinces()
-   {
-        $provinces = [
-            'alberta', 
-            'british_columbia', 
-            'manitoba', 
-            'new_brunswick', 
-            'newfoundland_and_labrador',
-            'northwest_territories', 
-            'nova_scotia', 
-            'nunavut', 
-            'prince_edward_island', 
-            'ontario',
-            'quebec', 
-            'saskatchewan',
-            'yukon'
-        ];
-
-        foreach ($provinces as $province) {
-            $countryRate = Taxes::countryRateFor($province);
-            $this->assertEquals('5', $countryRate);
-        }
-   }
-
-   /** @test */
    function it_calculates_provinces_taxes_rates_on_amount()
    {
         $alberta = new Taxes('10.00', 'alberta');
