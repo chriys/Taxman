@@ -59,6 +59,3 @@ class CalculateTaxesTest extends TestCase
         );
     }
 }
-
-// calculate compounded taxes
-// update readme
