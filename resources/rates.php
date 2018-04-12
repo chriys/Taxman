@@ -34,7 +34,7 @@ return [
         'state_rate' => ['hst' => '15'],
     ],
     'quebec' => [
-        'country_rate' => ['gst' => '5' ],
+        'country_rate' => ['gst' => '5'],
         'state_rate' => ['qst' => '9.975'],
     ],
     'saskatchewan' => [
