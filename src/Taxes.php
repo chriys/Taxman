@@ -177,11 +177,12 @@ class Taxes
      */
     private function generateTaxesDetails()
     {
-        return array_combine($this->taxes,
-            array_map(function ($value) {
-                return (string) $value;
-            }, $this->values())
-        );
+        return $this->flattenArray(
+            array_combine($this->taxes,
+                array_map(function ($key, $value) {
+                    return [$key => (string) $value];
+                }, array_keys($this->taxes), $this->values())
+        ));
     }
 
     /**

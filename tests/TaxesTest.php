@@ -83,6 +83,17 @@ class TaxesTest extends TestCase
         $this->assertArrayHasKey('total', $taxesDetails);
     }
 
+
+    /** @test */
+    function it_sets_tax_name_in_taxes_details()
+    {
+        $taxesDetails = Taxes::calculate('10', 'manitoba');
+
+        $this->assertArrayHasKey('gst', $taxesDetails['taxes_details']);
+        $this->assertArrayHasKey('pst', $taxesDetails['taxes_details']);
+    }
+
+
     /** @test */
     public function it_builds_a_json_object_with_calculations_details()
     {
@@ -90,9 +101,7 @@ class TaxesTest extends TestCase
 
         $taxesDetails = [
             'sub_total' => '10',
-            'taxes_details' => [
-                '1' => '0.1'
-            ],
+            'taxes_details' => ['0.1'],
             'taxes' => '0.1',
             'total' => '10.1',
         ];

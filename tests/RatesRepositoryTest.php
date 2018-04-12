@@ -56,5 +56,4 @@ class RatesRepositoryTest extends TestCase
         $alberta = new Taxes('10.00', 'alberta');
         $this->assertEquals('10.5', $alberta->total());
    }
-   
 }

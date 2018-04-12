@@ -21,7 +21,7 @@ Currently two main ways are available: using rates of Canadian provinces or usin
     Taxes::calculate('10.00', 'alberta');
     // expected result
     [
-        'sub_total' => '10',
+        'sub_total' => '10.00',
         'taxes_details' => [
             'gst' => '0.5',
             'pst' => '0.8',
