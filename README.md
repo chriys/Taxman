@@ -38,9 +38,9 @@ Currently two main ways are available: using rates of Canadian provinces or usin
     [
         'sub_total' => '45',
         'taxes_details' => [
-            '1' => '0.45',
-            '2' => '0.9',
-            '3' => '1.35',
+            0 => '0.45',
+            1 => '0.9',
+            2 => '1.35',
         ],
         'taxes' => '2.7',
         'total' => '47.7',
