@@ -74,6 +74,13 @@ class RatesRepositoryTest extends TestCase
             $this->assertEquals('5', $countryRate);
         }
    }
+
+   /** @test */
+   function it_calculates_provinces_taxes_rates_on_amount()
+   {
+        $alberta = new Taxes('10.00', 'alberta');
+        $this->assertEquals('10.5', $alberta->total());
+   }
    
 }
 
