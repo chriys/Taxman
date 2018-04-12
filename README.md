@@ -7,7 +7,7 @@
 PHP Sales Tax calculator using custom or Canadian rates
 
 ## Requierements
-This package requires `php 7.1`
+Requires `php >= 7.1`
 
 ## Installation
 Install the packages via composer: `composer require chriys/taxman`.
