@@ -2,8 +2,8 @@
 
 return [
     'alberta' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '0'],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['pst' => '0'],
     ],
     'british_columbia' => [
         'country_rate' => ['tvq' => '5'],

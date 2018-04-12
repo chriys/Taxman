@@ -77,13 +77,30 @@ class Taxes
     private function generateStateRates($state)
     {
         if (isset($this->repository[$state])) {
-            // var_dump($this->repository[$state]);
             return array_map(function($rate) {
                 return $rate;
-            }, array_values($this->repository[$state]));
+            }, $this->flattenArray(array_values($this->repository[$state])));
         }
 
         throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
+    }
+
+    private function flattenArray($array)
+    {
+        if (!is_array($array)) {
+            return $array;
+        }
+
+        $result = [];
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $result = array_merge($result, $value);
+            } else {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
     }
 
     /**
