@@ -32,7 +32,7 @@ class Taxes
     {
         $this->repository = include __DIR__.'/../resources/rates.php';
 
-        $this->amount = $this->parse($amount);
+        $this->amount = $this->parseNumber($amount);
 
         $this->taxes = $this->generate(...$taxes);
     }
@@ -44,7 +44,7 @@ class Taxes
      * @param mixed $amount
      * @return NonNumericInputException
      */
-    private function parse($amount)
+    private function parseNumber($amount)
     {
         if (! is_numeric($amount)) {
             throw new NonNumericInputException("The input: {$amount} is not numeric.");
@@ -70,14 +70,14 @@ class Taxes
         }
 
         return array_map(function ($tax) {
-            return $this->parse($tax);
+            return $this->parseNumber($tax);
         }, $taxes);
     }
 
     private function generateStateRates($state)
     {
         if (isset($this->repository[$state])) {
-            var_dump($this->repository[$state]);
+            // var_dump($this->repository[$state]);
             return array_map(function($rate) {
                 return $rate;
             }, array_values($this->repository[$state]));
