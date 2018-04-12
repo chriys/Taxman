@@ -8,7 +8,7 @@ use Taxman\Exceptions\NonNumericInputException;
 class Taxes
 {
     /**
-     * Repository of provinces taxes definitions
+     * Repository of provinces taxes definitions.
      *
      * @var array
      */
@@ -65,7 +65,7 @@ class Taxes
             return $this->generateRates($taxes);
         }
 
-        if (func_num_args() > 1 || !is_array($taxes)) {
+        if (func_num_args() > 1 || ! is_array($taxes)) {
             $taxes = func_get_args();
         }
 
@@ -77,11 +77,11 @@ class Taxes
     private function generateRates($state)
     {
         if (is_numeric($state)) {
-            return [$state];            
+            return [$state];
         }
 
         if (isset($this->repository[$state])) {
-            return array_map(function($rate) {
+            return array_map(function ($rate) {
                 return $rate;
             }, $this->flattenArray(array_values($this->repository[$state])));
         }
@@ -91,7 +91,7 @@ class Taxes
 
     private function flattenArray($array)
     {
-        if (!is_array($array)) {
+        if (! is_array($array)) {
             return $array;
         }
 
