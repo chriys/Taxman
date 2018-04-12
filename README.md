@@ -21,30 +21,31 @@ Currently two main ways are available: using rates of Canadian provinces or usin
 ```
     Taxes::calculate('10.00', 'alberta');
     // expected result
-    // [
-    //     'sub_total' => '10',
-    //     'taxes_details' => [
-    //         'gst' => '0.5',
-    //         'pst' => '0.8',
-    //     ],
-    //     'taxes' => '1.3',
-    //     'total' => '11.3',
-    // ]
+    [
+        'sub_total' => '10',
+        'taxes_details' => [
+            'gst' => '0.5',
+            'pst' => '0.8',
+        ],
+        'taxes' => '1.3',
+        'total' => '11.3',
+    ];
 ```
 
 ### Using custom taxes rates
 ```
     Taxes::calculate('45', [1, 2, 3]);
-    // [
-    //     'sub_total' => '45',
-    //     'taxes_details' => [
-    //         '1' => '0.45',
-    //         '2' => '0.9',
-    //         '3' => '1.35',
-    //     ],
-    //     'taxes' => '2.7',
-    //     'total' => '47.7',
-    // ]
+    // expected result
+    [
+        'sub_total' => '45',
+        'taxes_details' => [
+            '1' => '0.45',
+            '2' => '0.9',
+            '3' => '1.35',
+        ],
+        'taxes' => '2.7',
+        'total' => '47.7',
+    ];
 ```
 
 
