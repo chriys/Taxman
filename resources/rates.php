@@ -2,55 +2,46 @@
 
 return [
     'alberta' => [
-        'country_rate' => ['gst' => '5'],
-        'state_rate' => ['pst' => '0'],
+        'state_rate' => ['gst' => '5'],
     ],
     'british_columbia' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '7'],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['pst' => '7'],
     ],
     'manitoba' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '8'],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['pst' => '8'],
     ],
     'new_brunswick' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '10'],
+        'state_rate' => ['hst' => '15'],
     ],
     'newfoundland_and_labrador' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '10'],
+        'state_rate' => ['hst' => '15'],
     ],
     'northwest_territories' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '0'],
+        'state_rate' => ['gst' => '5'],
     ],
     'nova_scotia' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '10'],
+        'state_rate' => ['hst' => '15'],
     ],
     'nunavut' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '0'],
+        'state_rate' => ['gst' => '5'],
     ],
     'ontario' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '8'],
+        'state_rate' => ['hst' => '13'],
     ],
     'prince_edward_island' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '10'],
+        'state_rate' => ['hst' => '15'],
     ],
     'quebec' => [
-        'country_rate' => ['tvq' => '5' ],
-        'state_rate' => ['tvq' => '9.975'],
+        'country_rate' => ['gst' => '5' ],
+        'state_rate' => ['qst' => '9.975'],
     ],
     'saskatchewan' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '6'],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['pst' => '6'],
     ],
     'yukon' => [
-        'country_rate' => ['tvq' => '5'],
-        'state_rate' => ['tvq' => '0']
+        'state_rate' => ['gst' => '5'],
     ],
 ];
