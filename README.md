@@ -11,7 +11,6 @@ This package requires `php 7.1`
 
 ## Installation
 Install the packages via composer: `composer require chriys/taxman`.
-Then you can use it in your class: `use Taxman\Taxes`.
 
 ## Getting started
 This package allows to easily calculate taxes on an amount.
