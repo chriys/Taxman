@@ -58,7 +58,3 @@ class RatesRepositoryTest extends TestCase
    }
    
 }
-
-// allow abbreviation (i.e Alberta => AB)
-// calculate compounded taxes
-// update readme
