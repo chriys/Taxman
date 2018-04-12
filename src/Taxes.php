@@ -62,10 +62,10 @@ class Taxes
     private function generate($taxes)
     {
         if (func_num_args() == 1 && is_string($taxes)) {
-            return $this->generateStateRates($taxes);
+            return $this->generateRates($taxes);
         }
 
-        if (func_num_args() > 1 || ! is_array($taxes)) {
+        if (func_num_args() > 1 || !is_array($taxes)) {
             $taxes = func_get_args();
         }
 
@@ -74,8 +74,12 @@ class Taxes
         }, $taxes);
     }
 
-    private function generateStateRates($state)
+    private function generateRates($state)
     {
+        if (is_numeric($state)) {
+            return [$state];            
+        }
+
         if (isset($this->repository[$state])) {
             return array_map(function($rate) {
                 return $rate;
