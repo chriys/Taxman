@@ -8,6 +8,13 @@ use Taxman\Exceptions\NonNumericInputException;
 class Taxes
 {
     /**
+     * Repository of provinces taxes definitions.
+     *
+     * @var array
+     */
+    private $repository;
+
+    /**
      * The amount on which to calculate taxes.
      *
      * @var float
@@ -23,7 +30,9 @@ class Taxes
 
     public function __construct($amount, ...$taxes)
     {
-        $this->amount = $this->parse($amount);
+        $this->repository = include __DIR__.'/../resources/rates.php';
+
+        $this->amount = $this->parseNumber($amount);
 
         $this->taxes = $this->generate(...$taxes);
     }
@@ -35,7 +44,7 @@ class Taxes
      * @param mixed $amount
      * @return NonNumericInputException
      */
-    private function parse($amount)
+    private function parseNumber($amount)
     {
         if (! is_numeric($amount)) {
             throw new NonNumericInputException("The input: {$amount} is not numeric.");
@@ -52,13 +61,50 @@ class Taxes
      */
     private function generate($taxes)
     {
+        if (func_num_args() == 1 && is_string($taxes)) {
+            return $this->generateRates($taxes);
+        }
+
         if (func_num_args() > 1 || ! is_array($taxes)) {
             $taxes = func_get_args();
         }
 
         return array_map(function ($tax) {
-            return $this->parse($tax);
+            return $this->parseNumber($tax);
         }, $taxes);
+    }
+
+    private function generateRates($state)
+    {
+        if (is_numeric($state)) {
+            return [$state];
+        }
+
+        if (isset($this->repository[$state])) {
+            return array_map(function ($rate) {
+                return $rate;
+            }, $this->flattenArray(array_values($this->repository[$state])));
+        }
+
+        throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
+    }
+
+    private function flattenArray($array)
+    {
+        if (! is_array($array)) {
+            return $array;
+        }
+
+        $result = [];
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $result = array_merge($result, $value);
+            } else {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -208,7 +254,7 @@ class Taxes
         $rates = require __DIR__.'/../resources/rates.php';
 
         if (isset($rates[$state])) {
-            return $rates[$state]['state_rate']['rate'];
+            return array_values($rates[$state]['state_rate'])[0];
         }
 
         throw new NotFoundRateException("There is no tax rate definition with the name {$state}");
@@ -219,7 +265,7 @@ class Taxes
         $rates = require __DIR__.'/../resources/rates.php';
 
         if (isset($rates[$state])) {
-            return $rates[$state]['country_rate']['rate'];
+            return array_values($rates[$state]['country_rate'])[0];
         }
 
         throw new NotFoundRateException("There is no tax rate definition with the name {$state}");

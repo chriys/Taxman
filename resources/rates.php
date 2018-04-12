@@ -2,133 +2,46 @@
 
 return [
     'alberta' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '0',
-        ],
+        'state_rate' => ['gst' => '5'],
     ],
     'british_columbia' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '7',
-        ],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['pst' => '7'],
     ],
     'manitoba' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '8',
-        ],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['pst' => '8'],
     ],
     'new_brunswick' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '10',
-        ],
+        'state_rate' => ['hst' => '15'],
     ],
     'newfoundland_and_labrador' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '10',
-        ],
+        'state_rate' => ['hst' => '15'],
     ],
     'northwest_territories' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '0',
-        ],
+        'state_rate' => ['gst' => '5'],
     ],
     'nova_scotia' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '10',
-        ],
+        'state_rate' => ['hst' => '15'],
     ],
     'nunavut' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '0',
-        ],
+        'state_rate' => ['gst' => '5'],
     ],
     'ontario' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '8',
-        ],
+        'state_rate' => ['hst' => '13'],
     ],
     'prince_edward_island' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '10',
-        ],
+        'state_rate' => ['hst' => '15'],
     ],
     'quebec' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '9.975',
-        ],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['qst' => '9.975'],
     ],
     'saskatchewan' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '6',
-        ],
+        'country_rate' => ['gst' => '5'],
+        'state_rate' => ['pst' => '6'],
     ],
     'yukon' => [
-        'country_rate' => [
-            'name' => 'tvq',
-            'rate' => '5',
-        ],
-        'state_rate' => [
-            'name' => 'tvq',
-            'rate' => '0',
-        ],
+        'state_rate' => ['gst' => '5'],
     ],
 ];
